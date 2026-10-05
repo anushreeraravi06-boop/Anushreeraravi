@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>She-Shield</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     SHE-SHIELD APP
+========================= -->
+
+<div class="app">
+
+    <!-- HOME SCREEN -->
+    <section id="homeScreen" class="screen active">
+
+        <div class="logo-area">
+            <div class="logo">🛡️</div>
+            <h1>She-Shield</h1>
+            <p>Your safety. Your shield.</p>
+        </div>
+
+        <div class="home-buttons">
+
+            <button class="main-btn emergency-btn" onclick="openEmergency()">
+                🚨 Emergency SOS
+            </button>
+
+            <button class="main-btn safe-btn" onclick="openSafeTime()">
+                🛡️ Safe Time
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         EMERGENCY SOS SCREEN
+    ========================== -->
+
+    <section id="emergencyScreen" class="screen">
+
+        <button class="back-btn" onclick="goHome()">← Back</button>
+
+        <div class="emergency-container">
+
+            <h2>Emergency SOS</h2>
+
+            <p id="emergencyStatus">
+                Press the button only in an emergency.
+            </p>
+
+            <button
+                id="sosButton"
+                class="sos-circle"
+                onclick="activateSOS('manual')">
+
+                SOS
+
+            </button>
+
+            <div id="sosActions" class="sos-actions hidden">
+
+                <div class="action-card">
+                    📍
+                    <span>Location Sharing</span>
+                    <small id="locationStatus">Waiting...</small>
+                </div>
+
+                <div class="action-card">
+                    📞
+                    <span>Trusted Contacts</span>
+                    <small id="contactStatus">Waiting...</small>
+                </div>
+
+                <div class="action-card">
+                    🔊
+                    <span>Emergency Siren</span>
+                    <small id="sirenStatus">Waiting...</small>
+                </div>
+
+                <div class="action-card">
+                    🔦
+                    <span>Flash</span>
+                    <small>Supported devices</small>
+                </div>
+
+                <div class="action-card">
+                    🎙️
+                    <span>Evidence Recording</span>
+                    <small id="recordStatus">Waiting...</small>
+                </div>
+
+            </div>
+
+            <button
+                id="safeButton"
+                class="safe-confirm hidden"
+                onclick="stopSOS()">
+
+                ✓ I AM SAFE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SAFE TIME MENU
+    ========================== -->
+
+    <section id="safeTimeScreen" class="screen">
+
+        <button class="back-btn" onclick="goHome()">← Back</button>
+
+        <h2>Safe Time</h2>
+
+        <div class="feature-grid">
+
+            <button onclick="openTrustedContacts()">
+                👥
+                <span>Trusted Contacts</span>
+            </button>
+
+            <button onclick="silentSOS()">
+                🤫
+                <span>Silent SOS</span>
+            </button>
+
+            <button onclick="voiceSOS()">
+                🎤
+                <span>Voice SOS</span>
+            </button>
+
+            <button onclick="shakeSOSInfo()">
+                📳
+                <span>Shake SOS</span>
+            </button>
+
+            <button onclick="openAutoSOS()">
+                ⏱️
+                <span>Auto SOS</span>
+            </button>
+
+            <button onclick="captureEvidence()">
+                🎙️
+                <span>Capture Evidence</span>
+            </button>
+
+            <button onclick="fakeCall()">
+                📱
+                <span>Fake Calling</span>
+            </button>
+
+            <button onclick="showTips()">
+                💡
+                <span>TIP</span>
+            </button>
+
+            <button onclick="showHelplines()">
+                🆘
+                <span>Helplines</span>
+            </button>
+
+            <button onclick="automobileIssues()">
+                🚗
+                <span>Automobile Issues</span>
+            </button>
+
+            <button onclick="batterySaver()">
+                🔋
+                <span>Battery Saver</span>
+            </button>
+
+            <button onclick="showHistory()">
+                📜
+                <span>History</span>
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRUSTED CONTACTS
+    ========================== -->
+
+    <section id="contactsScreen" class="screen">
+
+        <button class="back-btn" onclick="openSafeTime()">← Back</button>
+
+        <h2>Trusted Contacts</h2>
+
+        <p>You can save up to 5 trusted contacts.</p>
+
+        <div id="contactList"></div>
+
+        <input
+            id="contactName"
+            type="text"
+            placeholder="Contact name">
+
+        <input
+            id="contactNumber"
+            type="tel"
+            placeholder="Phone number">
+
+        <button class="primary-btn" onclick="saveContact()">
+            + Add Contact
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         AUTO SOS
+    ========================== -->
+
+    <section id="autoSOSScreen" class="screen">
+
+        <button class="back-btn" onclick="openSafeTime()">← Back</button>
+
+        <h2>Auto SOS</h2>
+
+        <p>
+            SOS will activate after the countdown reaches zero.
+        </p>
+
+        <div id="countdown">10</div>
+
+        <button class="primary-btn" onclick="startAutoSOS()">
+            Start Countdown
+        </button>
+
+        <button
+            id="cancelAuto"
+            class="safe-confirm hidden"
+            onclick="cancelAutoSOS()">
+
+            I AM SAFE
+
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         HISTORY
+    ========================== -->
+
+    <section id="historyScreen" class="screen">
+
+        <button class="back-btn" onclick="openSafeTime()">← Back</button>
+
+        <h2>Emergency History</h2>
+
+        <div id="historyList">
+            <p>No emergency events yet.</p>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AUDIO
+    ========================== -->
+
+    <audio
+        id="emergencySiren"
+        loop
+        preload="auto">
+
+        <!-- Put your siren file here -->
+        <source src="siren.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+    <!-- =========================
+         MODAL
+    ========================== -->
+
+    <div id="modal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <button class="modal-close" onclick="closeModal()">×</button>
+
+            <h3 id="modalTitle"></h3>
+
+            <p id="modalText"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
+
+let sosActive = false;
+let autoTimer = null;
+let countdownValue = 10;
+
+let contacts =
+    JSON.parse(localStorage.getItem("sheShieldContacts")) || [];
+
+let history =
+    JSON.parse(localStorage.getItem("sheShieldHistory")) || [];
+
+
+/* ==========================================
+   SCREEN MANAGEMENT
+========================================== */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => screen.classList.remove("active"));
+
+    document.getElementById(id)
+        .classList.add("active");
+}
+
+
+function goHome() {
+    showScreen("homeScreen");
+}
+
+
+function openEmergency() {
+    showScreen("emergencyScreen");
+}
+
+
+function openSafeTime() {
+    showScreen("safeTimeScreen");
+}
+
+
+/* ==========================================
+   EMERGENCY SOS
+========================================== */
+
+async function activateSOS(source) {
+
+    if (sosActive) return;
+
+    sosActive = true;
+
+    const status =
+        document.getElementById("emergencyStatus");
+
+    status.innerText =
+        source === "shake"
+        ? "Shake SOS activated!"
+        : "EMERGENCY SOS ACTIVATED!";
+
+    document
+        .getElementById("sosActions")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("safeButton")
+        .classList.remove("hidden");
+
+
+    /* LOCATION */
+
+    getLocation();
+
+
+    /* CONTACTS */
+
+    alertTrustedContacts();
+
+
+    /* SIREN */
+
+    playSiren();
+
+
+    /* RECORDING */
+
+    startEmergencyRecording();
+
+
+    /* HISTORY */
+
+    addHistory(source);
+
+
+    /* FLASH */
+
+    flashScreen();
+}
+
+
+/* ==========================================
+   LOCATION
+========================================== */
+
+function getLocation() {
+
+    const locationStatus =
+        document.getElementById("locationStatus");
+
+    if (!navigator.geolocation) {
+
+        locationStatus.innerText =
+            "Location unavailable";
+
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        position => {
+
+            const lat =
+                position.coords.latitude;
+
+            const lon =
+                position.coords.longitude;
+
+            locationStatus.innerText =
+                "Location acquired";
+
+            window.currentLocation = {
+                latitude: lat,
+                longitude: lon
+            };
+
+        },
+
+        () => {
+
+            locationStatus.innerText =
+                "Permission denied";
+
+        }
+    );
+}
+
+
+/* ==========================================
+   TRUSTED CONTACTS
+========================================== */
+
+function alertTrustedContacts() {
+
+    const contactStatus =
+        document.getElementById("contactStatus");
+
+    if (contacts.length === 0) {
+
+        contactStatus.innerText =
+            "No contacts saved";
+
+        return;
+    }
+
+    contactStatus.innerText =
+        contacts.length + " contact(s) alerted";
+
+    /*
+       Browser limitation:
+
+       We cannot silently send WhatsApp messages.
+
+       We prepare a WhatsApp message and open
+       WhatsApp for the user.
+    */
+
+    const location =
+        window.currentLocation;
+
+    let message =
+        "I am in danger help me";
+
+    if (location) {
+
+        message +=
+            "\nMy location: https://maps.google.com/?q="
+            + location.latitude
+            + ","
+            + location.longitude;
+    }
+
+    const firstContact =
+        contacts[0].number;
+
+    const whatsappURL =
+        "https://wa.me/"
+        + firstContact
+        + "?text="
+        + encodeURIComponent(message);
+
+    setTimeout(() => {
+
+        window.open(
+            whatsappURL,
+            "_blank"
+        );
+
+    }, 1000);
+}
+
+
+/* ==========================================
+   SIREN
+========================================== */
+
+function playSiren() {
+
+    const siren =
+        document.getElementById("emergencySiren");
+
+    siren.currentTime = 0;
+
+    siren.play()
+        .then(() => {
+
+            document.getElementById(
+                "sirenStatus"
+            ).innerText = "Playing";
+
+        })
+        .catch(() => {
+
+            document.getElementById(
+                "sirenStatus"
+            ).innerText =
+                "Tap screen to allow sound";
+
+        });
+}
+
+
+function stopSiren() {
+
+    const siren =
+        document.getElementById("emergencySiren");
+
+    siren.pause();
+
+    siren.currentTime = 0;
+}
+
+
+/* ==========================================
+   FLASH EFFECT
+========================================== */
+
+function flashScreen() {
+
+    let count = 0;
+
+    const interval =
+        setInterval(() => {
+
+            document.body.classList.toggle(
+                "flash"
+            );
+
+            count++;
+
+            if (count >= 10) {
+
+                clearInterval(interval);
+
+                document.body.classList.remove(
+                    "flash"
+                );
+            }
+
+        }, 150);
+}
+
+
+/* ==========================================
+   EMERGENCY RECORDING
+========================================== */
+
+async function startEmergencyRecording() {
+
+    const recordStatus =
+        document.getElementById("recordStatus");
+
+    if (!navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia) {
+
+        recordStatus.innerText =
+            "Recording unavailable";
+
+        return;
+    }
+
+    try {
+
+        await navigator.mediaDevices
+            .getUserMedia({
+                audio: true,
+                video: true
+            });
+
+        recordStatus.innerText =
+            "Recording permission granted";
+
+    } catch {
+
+        recordStatus.innerText =
+            "Permission denied";
+    }
+}
+
+
+/* ==========================================
+   STOP SOS
+========================================== */
+
+function stopSOS() {
+
+    sosActive = false;
+
+    stopSiren();
+
+    document
+        .getElementById("safeButton")
+        .classList.add("hidden");
+
+    document
+        .getElementById("sosActions")
+        .classList.add("hidden");
+
+    document
+        .getElementById("emergencyStatus")
+        .innerText =
+        "You are marked SAFE.";
+
+    addHistory("SOS stopped — I AM SAFE");
+}
+
+
+/* ==========================================
+   TRUSTED CONTACT SCREEN
+========================================== */
+
+function openTrustedContacts() {
+
+    showScreen("contactsScreen");
+
+    renderContacts();
+}
+
+
+function saveContact() {
+
+    if (contacts.length >= 5) {
+
+        showModal(
+            "Limit reached",
+            "You can save a maximum of 5 trusted contacts."
+        );
+
+        return;
+    }
+
+    const name =
+        document.getElementById("contactName")
+        .value.trim();
+
+    const number =
+        document.getElementById("contactNumber")
+        .value.trim();
+
+    if (!name || !number) {
+
+        showModal(
+            "Missing information",
+            "Please enter both name and phone number."
+        );
+
+        return;
+    }
+
+    contacts.push({
+        name: name,
+        number: number
+    });
+
+    localStorage.setItem(
+        "sheShieldContacts",
+        JSON.stringify(contacts)
+    );
+
+    document.getElementById("contactName").value = "";
+    document.getElementById("contactNumber").value = "";
+
+    renderContacts();
+}
+
+
+function renderContacts() {
+
+    const list =
+        document.getElementById("contactList");
+
+    list.innerHTML = "";
+
+    if (contacts.length === 0) {
+
+        list.innerHTML =
+            "<p>No trusted contacts added.</p>";
+
+        return;
+    }
+
+    contacts.forEach((contact, index) => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "contact-item";
+
+        div.innerHTML = `
+            <strong>${contact.name}</strong>
+            <span>${contact.number}</span>
+            <button onclick="deleteContact(${index})">
+                Delete
+            </button>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+
+function deleteContact(index) {
+
+    contacts.splice(index, 1);
+
+    localStorage.setItem(
+        "sheShieldContacts",
+        JSON.stringify(contacts)
+    );
+
+    renderContacts();
+}
+
+
+/* ==========================================
+   SILENT SOS
+========================================== */
+
+function silentSOS() {
+
+    showModal(
+        "Silent SOS",
+        "Your location will be shared without activating the siren."
+    );
+
+    getLocation();
+}
+
+
+/* ==========================================
+   VOICE SOS
+========================================== */
+
+function voiceSOS() {
+
+    showModal(
+        "Voice SOS",
+        'Say the code word "phone" to activate SOS.'
+    );
+
+    startVoiceRecognition();
+}
+
+
+function startVoiceRecognition() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+
+        showModal(
+            "Not supported",
+            "Voice recognition is not supported by this browser."
+        );
+
+        return;
+    }
+
+    const recognition =
+        new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+
+    recognition.continuous = false;
+
+    recognition.onresult = event => {
+
+        const text =
+            event.results[0][0]
+            .transcript
+            .toLowerCase();
+
+        if (text.includes("phone")) {
+
+            openEmergency();
+
+            activateSOS("voice");
+
+        }
+
+    };
+
+    recognition.start();
+}
+
+
+/* ==========================================
+   SHAKE SOS
+========================================== */
+
+let lastShake = 0;
+
+function enableShakeSOS() {
+
+    if (!window.DeviceMotionEvent) {
+
+        console.log(
+            "Device motion not supported."
+        );
+
+        return;
+    }
+
+    window.addEventListener(
+        "devicemotion",
+        handleShake
+    );
+}
+
+
+function handleShake(event) {
+
+    if (sosActive) return;
+
+    const acceleration =
+        event.accelerationIncludingGravity;
+
+    if (!acceleration) return;
+
+    const x = acceleration.x || 0;
+    const y = acceleration.y || 0;
+    const z = acceleration.z || 0;
+
+    const force =
+        Math.sqrt(
+            x * x +
+            y * y +
+            z * z
+        );
+
+    const now =
+        Date.now();
+
+    /*
+       Prevent multiple SOS triggers
+       from one shake.
+    */
+
+    if (
+        force > 25 &&
+        now - lastShake > 2000
+    ) {
+
+        lastShake = now;
+
+        openEmergency();
+
+        activateSOS("shake");
+    }
+}
+
+
+function shakeSOSInfo() {
+
+    showModal(
+        "Shake SOS",
+        "Shake your phone strongly to activate Emergency SOS."
+    );
+}
+
+
+/* ==========================================
+   AUTO SOS
+========================================== */
+
+function openAutoSOS() {
+
+    showScreen("autoSOSScreen");
+
+    resetCountdown();
+}
+
+
+function resetCountdown() {
+
+    countdownValue = 10;
+
+    document.getElementById(
+        "countdown"
+    ).innerText = countdownValue;
+}
+
+
+function startAutoSOS() {
+
+    clearInterval(autoTimer);
+
+    countdownValue = 10;
+
+    document
+        .getElementById("cancelAuto")
+        .classList.remove("hidden");
+
+    autoTimer =
+        setInterval(() => {
+
+            countdownValue--;
+
+            document.getElementById(
+                "countdown"
+            ).innerText =
+                countdownValue;
+
+            if (countdownValue <= 0) {
+
+                clearInterval(autoTimer);
+
+                openEmergency();
+
+                activateSOS("auto");
+            }
+
+        }, 1000);
+}
+
+
+function cancelAutoSOS() {
+
+    clearInterval(autoTimer);
+
+    resetCountdown();
+
+    document
+        .getElementById("cancelAuto")
+        .classList.add("hidden");
+
+    showModal(
+        "Cancelled",
+        "Auto SOS has been cancelled. You are safe."
+    );
+}
+
+
+/* ==========================================
+   CAPTURE EVIDENCE
+========================================== */
+
+async function captureEvidence() {
+
+    if (!navigator.mediaDevices) {
+
+        showModal(
+            "Unavailable",
+            "Camera/audio recording is not available."
+        );
+
+        return;
+    }
+
+    try {
+
+        await navigator.mediaDevices
+            .getUserMedia({
+                audio: true,
+                video: true
+            });
+
+        showModal(
+            "Evidence",
+            "Camera and microphone permission granted."
+        );
+
+    } catch {
+
+        showModal(
+            "Permission denied",
+            "Camera or microphone permission was denied."
+        );
+    }
+}
+
+
+/* ==========================================
+   FAKE CALL
+========================================== */
+
+function fakeCall() {
+
+    showModal(
+        "Fake Calling",
+        "Fake incoming call activated."
+    );
+
+    setTimeout(() => {
+
+        alert(
+            "📞 Incoming Call\n\nMom"
+        );
+
+    }, 1000);
+}
+
+
+/* ==========================================
+   TIP
+========================================== */
+
+function showTips() {
+
+    showModal(
+        "Safety TIP",
+        "Stay aware of your surroundings and keep your trusted contacts updated."
+    );
+}
+
+
+/* ==========================================
+   HELPLINES
+========================================== */
+
+function showHelplines() {
+
+    showModal(
+        "Emergency Helplines",
+        "Police: 112\nWomen Helpline: 181\nEmergency: 112"
+    );
+}
+
+
+/* ==========================================
+   AUTOMOBILE ISSUES
+========================================== */
+
+function automobileIssues() {
+
+    showModal(
+        "Automobile Issues",
+        "Vehicle breakdown? Move to a safe location and contact roadside assistance or a trusted person."
+    );
+}
+
+
+/* ==========================================
+   BATTERY SAVER
+========================================== */
+
+function batterySaver() {
+
+    showModal(
+        "Battery Saver",
+        "Battery Saver Mode reduces unnecessary background activity."
+    );
+}
+
+
+/* ==========================================
+   HISTORY
+========================================== */
+
+function addHistory(type) {
+
+    const event = {
+
+        type: type,
+
+        time:
+            new Date().toLocaleString(),
+
+        location:
+            window.currentLocation || null
+    };
+
+    history.unshift(event);
+
+    localStorage.setItem(
+        "sheShieldHistory",
+        JSON.stringify(history)
+    );
+}
+
+
+function showHistory() {
+
+    showScreen("historyScreen");
+
+    const list =
+        document.getElementById("historyList");
+
+    if (history.length === 0) {
+
+        list.innerHTML =
+            "<p>No emergency events yet.</p>";
+
+        return;
+    }
+
+    list.innerHTML = "";
+
+    history.forEach(event => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "history-item";
+
+        div.innerHTML = `
+            <strong>🚨 ${event.type}</strong>
+            <small>${event.time}</small>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+function showModal(title, text) {
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText = title;
+
+    document.getElementById(
+        "modalText"
+    ).innerText = text;
+
+    document
+        .getElementById("modal")
+        .classList.remove("hidden");
+}
+
+
+function closeModal() {
+
+    document
+        .getElementById("modal")
+        .classList.add("hidden");
+}
+
+
+/* ==========================================
+   BATTERY ALERT
+========================================== */
+
+if ("getBattery" in navigator) {
+
+    navigator.getBattery()
+        .then(battery => {
+
+            function checkBattery() {
+
+                if (battery.level <= 0.10) {
+
+                    showModal(
+                        "Low Battery",
+                        "Battery is below 10%. Consider enabling Battery Saver Mode."
+                    );
+                }
+            }
+
+            battery.addEventListener(
+                "levelchange",
+                checkBattery
+            );
+
+        });
+}
+
+
+/* ==========================================
+   START SHAKE DETECTION
+========================================== */
+
+enableShakeSOS();
+
+
+/* ==========================================
+   INITIALIZATION
+========================================== */
+
+renderContacts();
+
+</script>
+
+</body>
+</html>
